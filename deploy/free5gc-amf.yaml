@@ -20,9 +20,11 @@ spec:
         args: ["-c", "/root/free5gc/free5gc-amfd"]
         volumeMounts:
         - name: free5gc-config
-          mountPath: /root/free5gc/install/etc/free5gc/
+          mountPath: /root/free5gc/install/etc/free5gc/free5gc.conf
+          subPath: free5gc.conf
         - name: free5gc-freediameter-config
-          mountPath: /root/free5gc/install/etc/free5gc/freediameter/
+          mountPath: /root/free5gc/install/etc/free5gc/freeDiameter/amf.conf
+          subPath: amf.conf
       initContainers:
       - name: init-network-client
         image: sdnvortex/network-controller:v0.4.9

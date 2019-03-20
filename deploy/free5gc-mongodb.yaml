@@ -6,40 +6,40 @@ spec:
   ports:
   - port: 27017
   selector:
-    app: mongo
+    app: free5gc-mongodb
   clusterIP: None
 ---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: free5gc-mongo
+  name: free5gc-mongodb
 spec:
   selector:
     matchLabels:
-      app: free5gc-mongo
+      app: free5gc-mongodb
   template:
     metadata:
       labels:
-        app: free5gc-mongo
+        app: free5gc-mongodb
     spec:
       containers:
       - image: cewuandy/nextepc-mongodb
-        name: free5gc-mongo
+        name: free5gc-mongodb
         ports:
         - containerPort: 27017
-          name: mongo
+          name: mongodb
         volumeMounts:
-        - name: mongo-persistent-storage
+        - name: mongodb-persistent-storage
           mountPath: /data/db
       volumes:
-      - name: mongo-persistent-storage
+      - name: mongodb-persistent-storage
         persistentVolumeClaim:
-          claimName: mongo-pv-claim
+          claimName: mongodb-pv-claim
 ---
 kind: PersistentVolume
 apiVersion: v1
 metadata:
-  name: mongo-pv-volume
+  name: mongodb-pv-volume
   labels:
     type: local
 spec:
@@ -53,7 +53,7 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mongo-pv-claim
+  name: mongodb-pv-claim
 spec:
   accessModes:
     - ReadWriteOnce

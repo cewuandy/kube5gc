@@ -13,14 +13,18 @@ spec:
         app: free5gc-upf
     spec:
       containers:      
-      - name: myapp-container
+      - name: free5gc-upf-container
         image: cewuandy/free5gc-base
-        imagePullPolicy: Always
+        securityContext:
+          privileged: true
         command: ["/bin/sh"]
-        args: ["-c", "/root/free5gc/free5gc-upfd"]
+        args: ["-c", "/root/free5gc/setup-uptun.sh && sh -c /root/free5gc/free5gc-upfd"]
         volumeMounts:
-        - name: free5gc-config
-          mountPath: /root/free5gc/install/etc/free5gc/
+          - mountPath: /dev/net/tun
+            name: tun-volume
+          - name: free5gc-config
+            mountPath: /root/free5gc/install/etc/free5gc/free5gc.conf
+            subPath: free5gc.conf
       initContainers:
       - name: init-network-client
         image: sdnvortex/network-controller:v0.4.9
@@ -46,9 +50,12 @@ spec:
       - name: grpc-sock
         hostPath:
           path: /tmp/vortex/
+      - name: tun-volume
+        hostPath:
+          path: /dev/net/tun
       - name: free5gc-config
         configMap:
           name: free5gc-configmap
-          items: 
+          items:
           - key: free5gc.conf
             path: free5gc.conf
