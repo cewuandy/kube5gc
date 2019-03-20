@@ -19,11 +19,14 @@ spec:
         command: ["/bin/sh"]
         args: ["-c", "/root/free5gc/nextepc-pcrfd"]
         volumeMounts:
+        - name: free5gc-config
+          mountPath: /root/free5gc/install/etc/free5gc/free5gc.conf
+          subPath: free5gc.conf
         - name: nextepc-config
           mountPath: /root/free5gc/install/etc/free5gc/pcrf.conf
           subPath: pcrf.conf
         - name: nextepc-freediameter-config
-          mountPath: /root/free5gc/install/etc/free5gc/freediameter/pcrf.conf
+          mountPath: /root/free5gc/install/etc/free5gc/freeDiameter/pcrf.conf
           subPath: pcrf.conf
       initContainers:
       - name: init-network-client
@@ -50,6 +53,12 @@ spec:
       - name: grpc-sock
         hostPath:
           path: /tmp/vortex/
+      - name: free5gc-config
+        configMap:
+          name: free5gc-configmap
+          items:
+          - key: free5gc.conf
+            path: free5gc.conf
       - name: nextepc-config
         configMap:
           name: nextepc-configmap

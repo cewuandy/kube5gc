@@ -23,7 +23,7 @@ spec:
           mountPath: /root/free5gc/install/etc/free5gc/free5gc.conf
           subPath: free5gc.conf
         - name: free5gc-freediameter-config
-          mountPath: /root/free5gc/install/etc/free5gc/freediameter/smf.conf
+          mountPath: /root/free5gc/install/etc/free5gc/freeDiameter/smf.conf
           subPath: smf.conf
       initContainers:
       - name: init-network-client
