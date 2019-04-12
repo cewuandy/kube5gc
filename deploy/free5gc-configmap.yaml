@@ -211,6 +211,16 @@ data:
             addr: smf-service
 
     smf:
+      pfcp:
+        - addr: 192.188.2.4
+  
+      upf:
+        - addr: 192.188.2.5
+  
+      http:
+        addr: 192.188.2.4
+        port: 8080
+
       freeDiameter:
         identity: smf.localdomain
         realm: localdomain
@@ -230,16 +240,6 @@ data:
           - identity: pcrf.localdomain
             # remote addr: both IP/FQDN are supported
             addr: pcrf-service
-
-        pfcp:
-          - addr: 192.188.2.4
-
-        upf:
-          - addr: 192.188.2.5
-
-        http:
-          addr: 192.188.2.4
-          port: 8080
 
     #
     #  <UE Pool>
@@ -291,8 +291,8 @@ data:
     #        apn: volte
     #        dev: uptun3
     #
-        ue_pool:
-          - addr: 45.45.0.1/16
+      ue_pool:
+        - addr: 45.45.0.1/16
 
     #
     #  <Domain Name Server>
@@ -304,9 +304,9 @@ data:
           - 8.8.4.4
 
     upf:
-        pfcp:
-          addr:
-            - 192.188.2.5
+      pfcp:
+        addr:
+          - 192.188.2.5
 
     #
     #  <GTP-U Server>>
@@ -320,15 +320,15 @@ data:
     #    gtpu:
     #      name: localhost
     #
-        gtpu:
-          - addr: 192.188.2.5
-
-        ue_pool:
-          - addr: 45.45.0.1/16
-
-        dns:
-          - 8.8.8.8
-          - 8.8.4.4
+      gtpu:
+        - addr: 192.188.2.5
+  
+      ue_pool:
+        - addr: 45.45.0.1/16
+  
+      dns:
+        - 8.8.8.8
+        - 8.8.4.4
 kind: ConfigMap
 metadata:
   name: free5gc-configmap
