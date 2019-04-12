@@ -40,7 +40,26 @@ data:
         no_ipv6: true
 
     amf:
-        freeDiameter: amf.conf
+      freeDiameter:
+        identity: amf.localdomain
+        realm: localdomain
+        no_sctp: true
+        # listen_on addr: both IP/FQDN are supported
+        listen_on: amf-service
+        load_extension:
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dbg_msg_dumps/.libs/dbg_msg_dumps.so
+            conf: 0x8888
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_rfc5777/.libs/dict_rfc5777.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_mip6i/.libs/dict_mip6i.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_nasreq/.libs/dict_nasreq.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_nas_mipv6/.libs/dict_nas_mipv6.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_dcca/.libs/dict_dcca.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_dcca_3gpp/.libs/dict_dcca_3gpp.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_s6a/.libs/dict_s6a.so
+        connect:
+          - identity: hss.localdomain
+            # remote addr: both IP/FQDN are supported
+            addr: hss-service
 
     #
     #  <S1AP Server>>
@@ -149,13 +168,68 @@ data:
             full: free5GC
 
     hss:
-        freeDiameter: hss.conf
+      freeDiameter:
+        identity: hss.localdomain
+        realm: localdomain
+        no_sctp: true
+        # listen addr: both IP/FQDN are supported
+        listen_on: hss-service
+        load_extension:
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dbg_msg_dumps/.libs/dbg_msg_dumps.so
+            conf: 0x8888
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_rfc5777/.libs/dict_rfc5777.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_mip6i/.libs/dict_mip6i.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_nasreq/.libs/dict_nasreq.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_nas_mipv6/.libs/dict_nas_mipv6.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_dcca/.libs/dict_dcca.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_dcca_3gpp/.libs/dict_dcca_3gpp.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_s6a/.libs/dict_s6a.so
+        connect:
+          - identity: amf.localdomain
+            # remote addr: both IP/FQDN are supported
+            addr: amf-service
 
     pcrf:
-        freeDiameter: pcrf.conf
+      freeDiameter:
+        identity: pcrf.localdomain
+        realm: localdomain
+        no_sctp: true
+        # listen addr: both IP/FQDN are supported
+        listen_on: pcrf-service
+        load_extension:
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dbg_msg_dumps/.libs/dbg_msg_dumps.so
+            conf: 0x8888
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_rfc5777/.libs/dict_rfc5777.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_mip6i/.libs/dict_mip6i.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_nasreq/.libs/dict_nasreq.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_nas_mipv6/.libs/dict_nas_mipv6.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_dcca/.libs/dict_dcca.so
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dict_dcca_3gpp/.libs/dict_dcca_3gpp.so
+        connect:
+          - identity: smf.localdomain
+            # remote addr: both IP/FQDN are supported
+            addr: smf-service
 
     smf:
-        freeDiameter: smf.conf
+      freeDiameter:
+        identity: smf.localdomain
+        realm: localdomain
+        no_sctp: true
+        # listen_on addr: both IP/FQDN are supported
+        listen_on: smf-service
+        load_extension:
+          - module: /root/nextepc/lib/freeDiameter-1.2.1/extensions/dbg_msg_dumps/.libs/dbg_msg_dumps.so
+            conf: 0x8888
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_rfc5777/.libs/dict_rfc5777.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_mip6i/.libs/dict_mip6i.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_nasreq/.libs/dict_nasreq.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_nas_mipv6/.libs/dict_nas_mipv6.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_dcca/.libs/dict_dcca.so
+          - module: /root/free5gc/lib/freeDiameter-1.2.1/extensions/dict_dcca_3gpp/.libs/dict_dcca_3gpp.so
+        connect:
+          - identity: pcrf.localdomain
+            # remote addr: both IP/FQDN are supported
+            addr: pcrf-service
 
         pfcp:
           - addr: 192.188.2.4
