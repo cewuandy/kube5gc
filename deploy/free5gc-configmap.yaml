@@ -86,7 +86,7 @@ data:
     #      dev: eth0
     #
         s1ap:
-          addr: 192.188.2.2
+          addr: 192.168.2.2
 
     #
     #  <GUMMEI>
@@ -232,13 +232,13 @@ data:
               addr: pcrf-service
 
         pfcp:
-          - addr: 192.188.2.4
+          - addr: 192.168.2.4
 
         upf:
-          - addr: 192.188.2.5
+          - addr: 192.168.2.5
 
         http:
-          addr: 192.188.2.4
+          addr: 192.168.2.4
           port: 8080
 
     #
@@ -306,7 +306,7 @@ data:
     upf:
         pfcp:
           addr:
-            - 192.188.2.5
+            - 192.168.2.5
 
     #
     #  <GTP-U Server>>
@@ -321,7 +321,7 @@ data:
     #      name: localhost
     #
         gtpu:
-          - addr: 192.188.2.5
+          - addr: 192.168.2.5
 
         ue_pool:
           - addr: 45.45.0.1/16
